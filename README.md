@@ -1,111 +1,142 @@
-System Design Document
-1. Overview
-1.1. Project Title
-Exploring the Effects of Course Interaction and Coursework Performance on Early Withdrawals in Higher Education
-1.2. Purpose
-This system aims to visualize student interaction and assessment performance data to identify potential factors contributing to withdrawal rates. It provides insights into how program and personal factors interact, guiding future course design and research.
-1.3. Scope
-•	Generate interactive visualizations to compare withdrawn and non-withdrawn students.
-•	Focus on course-specific analysis with personal factors as filters.
-•	Ensure usability and responsiveness for data exploration.
-________________________________________
-2. System Architecture
-2.1. Components
-•	Frontend 
-o	Technology: React.js, D3.js
-o	Responsibilities: Render graphs, enable interactivity (dropdowns, checkboxes, overlays).
-•	Backend 
-o	Technology: Python (Flask/Django) or Node.js
-o	Responsibilities: Data pre-processing, serving API endpoints for filtered datasets.
-•	Data Storage 
-o	Technology: PostgreSQL/MySQL
-o	Dataset: Open University Learning Analytics dataset, pre-processed for analysis.
-•	Deployment 
-o	Platform: AWS/GCP/Azure
-o	Services: S3 for static assets, Lambda for API endpoints, CloudFront for CDN.
-2.2. Data Flow Diagram
-graph TD
-A[User Interaction] --> B[Frontend]
-B --> C[Backend API]
-C --> D[Database]
-C --> E[Processed Data for Visualization]
-E --> B
-________________________________________
-3. Functional Requirements
-3.1. Core Features
-1.	Course Interaction Visualization 
-o	3D contour plots of daily clicks by withdrawal date.
-o	Overlays for non-withdrawn student interactions.
-2.	Assessment Performance Visualization 
-o	Bar and cumulative graphs of average grades.
-o	Boxplot toggles for grade distributions.
-3.2. Interactivity
-•	Dropdown menus for filtering by courses, personal factors, and assessments attempted.
-•	Checkboxes for overlays and axis inversion.
-3.3. Usability
-•	Fast graph updates for seamless interactivity.
-•	User-friendly labeling and tooltips.
-________________________________________
-4. Non-Functional Requirements
-1.	Performance 
-o	Ensure graph rendering within 1 second for datasets up to 10,000 entries.
-2.	Scalability 
-o	Support additional datasets and new visualization types.
-3.	Security 
-o	Enforce HTTPS and secure API endpoints.
-4.	Maintainability 
-o	Modular codebase with clear documentation.
-________________________________________
-5. Data Design
-5.1. Dataset Overview
-•	Personal Factors: Gender, age band, region, IMD band, education level, disability.
-•	Program Factors: Daily clicks, assessment grades, withdrawal status.
-•	Derived Data: Trends, averages, and interaction summaries.
-5.2. Database Schema
-Table	Columns	Description
-students	id, gender, age_band, region, imd_band, highest_education, disability	Personal factors.
-interactions	student_id, date, daily_clicks	Interaction data.
-assessments	student_id, assessment_id, grade	Assessment performance.
-withdrawals	student_id, withdrawal_date	Withdrawal records.
-________________________________________
-6. System Design Details
-6.1. Frontend
-•	Use D3.js for dynamic graph rendering.
-•	Dropdowns and checkboxes implemented with React state management.
-•	Responsive design for desktop and mobile.
-6.2. Backend
-•	API endpoints for querying: 
-o	/api/courses/{course_id}/interactions
-o	/api/courses/{course_id}/assessments
-o	Filters applied via query parameters (e.g., ?group_by=age_band).
-6.3. Data Processing
-•	Pre-compute interaction trends and averages for efficiency.
-•	Cache processed results for common queries.
-________________________________________
-7. User Interaction Design
-7.1. UI Components
-1.	Graphs
-o	3D Contour Plot: Visualize daily clicks over time.
-o	Bar Graph: Assessment grades per student.
-2.	Filters
-o	Dropdown menus for course selection and grouping factors.
-o	Checkboxes for toggling overlays.
-7.2. Workflow
-1.	Select a course from the dropdown.
-2.	Apply grouping filters (e.g., age, gender).
-3.	Toggle overlays to compare withdrawn and non-withdrawn data.
-________________________________________
-8. Future Improvements
-1.	Interactive 3D Graphs 
-o	Allow users to rotate and zoom for better visualization.
-2.	Expanded Dataset 
-o	Integrate more recent datasets for broader analysis.
-3.	AI Integration 
-o	Use machine learning to predict at-risk students.
-________________________________________
-9. References
-•	Open University Learning Analytics Dataset
-•	Libraries: React.js, D3.js, Flask/Django
-•	Hosting: AWS/GCP/Azure
-________________________________________
+# Early Withdrawals in Higher Education: Visualizing Course Interaction and Performance
 
+## Overview
+
+This project explores the effects of course interaction and coursework performance on early withdrawals in higher education. Using visual analytics, it identifies factors that may influence student withdrawal decisions, offering insights that can guide future course design and academic interventions. The system visualizes both course-specific data and personal factors through interactive graphs and provides an intuitive user interface for educators, researchers, and data analysts.
+
+## Features
+
+- **Interactive Visualizations**  
+  Display 3D contour plots and bar graphs to visualize student interaction with course material and assessment performance.
+  
+- **Filters & Grouping**  
+  Apply various filters for personal and program factors such as age, gender, disability, and interaction data to identify trends.
+
+- **Overlay Comparisons**  
+  Compare withdrawn vs. non-withdrawn students with toggleable overlays.
+
+- **Course and Assessment Performance**  
+  Visualize course-specific interactions and performance metrics like average grades and interaction patterns.
+
+## Installation
+
+### Prerequisites
+
+- **Node.js** (for frontend)
+- **Python 3.8+** (for backend)
+- **PostgreSQL** or **MySQL** (for database)
+
+### Frontend Setup
+
+1. Clone the repository:
+
+```bash
+git clone https://github.com/your-username/early-withdrawals-visualization.git
+cd early-withdrawals-visualization
+```
+
+2. Install dependencies:
+
+```bash
+npm install
+```
+
+3. Run the frontend:
+
+```bash
+npm start
+```
+
+The frontend will be accessible at `http://localhost:3000`.
+
+### Backend Setup
+
+1. Clone the repository if not already done:
+
+```bash
+git clone https://github.com/your-username/early-withdrawals-visualization.git
+cd early-withdrawals-visualization
+```
+
+2. Set up a virtual environment for Python:
+
+```bash
+python3 -m venv venv
+source venv/bin/activate  # On Windows use `venv\Scripts\activate`
+```
+
+3. Install dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+4. Set up the database (PostgreSQL/MySQL):
+
+```bash
+# Create a new database and configure your database settings in `config.py`
+```
+
+5. Run the backend:
+
+```bash
+python app.py
+```
+
+The backend will be accessible at `http://localhost:5000`.
+
+---
+
+## Usage
+
+1. Open the web application (`http://localhost:3000`).
+2. Select a course from the dropdown menu.
+3. Use filters to group data by personal factors like age, gender, or disability.
+4. Toggle overlays to compare withdrawn and non-withdrawn students.
+5. Interact with the visualizations to explore trends and patterns in course interactions and performance.
+
+---
+
+## Technologies Used
+
+- **Frontend**: React.js, D3.js  
+- **Backend**: Python (Flask/Django)  
+- **Database**: PostgreSQL/MySQL  
+- **Deployment**: AWS/GCP/Azure  
+
+---
+
+## Database Schema
+
+### Students Table
+- `id`: Unique identifier
+- `gender`: Gender of the student
+- `age_band`: Age group of the student
+- `region`: Geographic region
+- `imd_band`: Index of Multiple Deprivation
+- `highest_education`: Highest level of prior education
+- `disability`: Disability status
+
+### Interactions Table
+- `student_id`: Foreign key to `students`
+- `date`: Date of interaction
+- `daily_clicks`: Number of clicks on course material for that day
+
+### Assessments Table
+- `student_id`: Foreign key to `students`
+- `assessment_id`: Unique identifier for the assessment
+- `grade`: Grade achieved by the student
+
+### Withdrawals Table
+- `student_id`: Foreign key to `students`
+- `withdrawal_date`: Date the student withdrew from the course
+
+---
+
+## Contribution Guidelines
+
+1. Fork the repository.
+2. Create a new branch for your feature or bugfix.
+3. Commit your changes.
+4. Push your changes to your fork.
+5. Submit a pull request.
