@@ -16,6 +16,26 @@ This project is a web-based application that allows users to view graphs of stud
 - JavaScript
 
 ## File Structure
+- `/assets/images/`: Contains pre-made graph images representing student data.
+- `/css/`: Contains the `style.css` file for styling the application.
+- `/js/`: Contains the `script.js` file for JavaScript functionality.
+- `index.html`: Homepage of the application.
+- `graph.html`: Page to view student graphs and statuses.
+- `settings.html`: Placeholder for user settings page.
+- `profile.html`: Placeholder for user profile page.
 
-The project is structured as follows:
+## How to Run
 
+To run the application locally:
+
+1. **Clone the repository** or download the project files.
+2. Open `index.html` in your browser to view the homepage.
+3. Navigate to the **Graphs** page to view the graph display functionality.
+4. Select a student from the dropdown, and the corresponding graph and status will be displayed.
+5. Use the **Notify Student** button to simulate sending a notification to the student based on their academic status.
+
+### Example Workflow:
+
+1. **Select a Student**: Choose a student from the dropdown list.
+2. **View Graph**: The corresponding graph will be displayed with the status ("Stable Pattern" or "Dangerous Pattern").
+3. **Notify Student**: Click the "Notify Student" button to simulate sending a notification about the student's academic status.
