@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,
+      initial-scale=1.0">
+    <title>Cascading Dropdown Example
+    </title>
+    <style>
+        body {
+            font-family: Arial,
+                sans-serif;
+        }
+
+        select {
+            margin: 10px 0;
+            padding: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <label for="country">
+        Country:</label>
+    <select id="country">
+        <option value="">
+            Select a country
+        </option>
+        <option value="BBB_2014J">
+            BBB_2014J</option>
+        <option value="EEE_2014B">
+            EEE_2014B</option>
+    </select>
+    <label for="state">
+        Attempted:</label>
+    <select id="state">
+        <option value="">
+            AttemptValue
+        </option>
+    </select>
+    
+    <script>
+        const states = {
+            BBB_2014J: {
+                attempted: {
+                    all: ['All', 'Disability', 'Gender'],
+                    attempted_1: ['All', 'Disability', 'Gender'],
+                    attempted_2: ['All', 'Disability', 'Gender'],
+                    attempted_3: ['All', 'Disability', 'Gender'],
+                    attempted_4: ['All', 'Disability', 'Gender']
+                }
+            },
+            EEE_2014B: {
+                attempted: {
+                    all: ['All', 'Disability', 'Gender'],
+                    attempted_1: ['All', 'Disability', 'Gender'],
+                    attempted_2: ['All', 'Disability', 'Gender'],
+                    attempted_3: ['All', 'Disability', 'Gender']
+                }
+            }
+            
+        };
+
+        document.getElementById('country').
+            addEventListener('change', function () {
+                const country = this.value;
+                const stateDropdown =
+                    document.getElementById('state');
+                stateDropdown.innerHTML =
+                    '<option value="">Attempt Value</option > ';
+                if (states[country]) {
+                    states[country].forEach(state => {
+                        const option =
+                            document.createElement('option');
+                        option.value =
+                            state.toLowerCase().replace(/\s+/g, '-');
+                        option.textContent = state;
+                        stateDropdown.appendChild(option);
+                    });
+                }
+            });
+    </script>
+</body>
+
+</html>
