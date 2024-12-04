@@ -24,18 +24,20 @@
             <h2>Select a Student to View Their Graph</h2>
             <select id="studentSelect" onchange="updateGraph()">
                 <option value="">-- Select a Student --</option>
-                <option value="student1">Student 1</option>
-                <option value="student2">Student 2</option>
+                <option value="student1">BBB_2014J</option>
+                <option value="student2">EEE_2014B</option>
                 <option value="student3">Student 3</option>
             </select>
         </section>
 
         <section id="graphSection" style="display:none;">
             <h3>Student Graph</h3>
-            <img id="graphImage" src="" alt="Student Graph" />
+            <!-- <img id="graphImage" src="" alt="Student Graph" /> -->
+            <iframe id="igraph" scrolling="no" style="border:none;" seamless="seamless" src="graph_html_data/BBB_2014J/all/BBB_2014J_assessment_average.html" height="525" width="100%"></iframe>
             <p id="status"></p>
             <button id="notifyBtn" onclick="notifyStudent()">Notify Student</button>
         </section>
+        
     </main>
     <footer>
         <p>&copy; 2024 Student Graph Viewer</p>

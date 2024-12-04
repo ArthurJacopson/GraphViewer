@@ -15,12 +15,12 @@ function updateGraph() {
         // Based on student selection, update the graph and status
         switch (selectedStudent) {
             case "student1":
-                graphImage.src = "assets/images/graph_student1.png";
+                igraph.src = "graph_html_data/BBB_2014J/all/BBB_2014J_assessment_average.html";
                 status.textContent = "Stable Pattern";
                 status.style.color = "green";
                 break;
             case "student2":
-                graphImage.src = "assets/images/graph_student2.png";
+                igraph.src = "graph_html_data/EEE_2014B/all/EEE_2014B_vle_line.html";
                 status.textContent = "Dangerous Pattern";
                 status.style.color = "red";
                 break;
