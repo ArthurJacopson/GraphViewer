@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Graphs</title>
+    <title>Student Graph Viewer</title>
     <link rel="stylesheet" href="css/style.css">
     <script src="js/script.js" defer></script>
 </head>
@@ -21,23 +21,31 @@
     </header>
     <main>
         <section>
-            <h2>Select a Student to View Their Graph</h2>
-            <select id="studentSelect" onchange="updateGraph()">
-                <option value="">-- Select a Student --</option>
-                <option value="student1">BBB_2014J</option>
-                <option value="student2">EEE_2014B</option>
-                <option value="student3">Student 3</option>
+            <h2>Select Graph to View</h2>
+            <!-- Dropdown for categories -->
+            <label for="categorySelect">Category:</label>
+            <select id="categorySelect" onchange="populateSubcategories()">
+                <option value="">-- Select a Category --</option>
+                <option value="BBB_2014J">BBB_2014J</option>
+                <option value="EEE_2014B">EEE_2014B</option>
+            </select>
+
+            <!-- Dropdown for subcategories -->
+            <label for="subcategorySelect">Subcategory:</label>
+            <select id="subcategorySelect" onchange="populateGraphs()">
+                <option value="">-- Select a Subcategory --</option>
+            </select>
+
+            <!-- Dropdown for graph files -->
+            <label for="graphSelect">Graph:</label>
+            <select id="graphSelect" onchange="displayGraph()">
+                <option value="">-- Select a Graph --</option>
             </select>
         </section>
 
-        <section id="graphSection" style="display:none;">
-            <h3>Student Graph</h3>
-            <!-- <img id="graphImage" src="" alt="Student Graph" /> -->
-            <iframe id="igraph" scrolling="no" style="border:none;" seamless="seamless" src="graph_html_data/BBB_2014J/all/BBB_2014J_assessment_average.html" height="525" width="100%"></iframe>
-            <p id="status"></p>
-            <button id="notifyBtn" onclick="notifyStudent()">Notify Student</button>
+        <section id="graphSection">
+            <iframe id="graphIframe" src="" style="width: 100%; height: 500px; border: 1px solid #ccc;"></iframe>
         </section>
-        
     </main>
     <footer>
         <p>&copy; 2024 Student Graph Viewer</p>
